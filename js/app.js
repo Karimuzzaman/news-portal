@@ -1,3 +1,4 @@
+// loading api
 function loadCategory() {
     const url = `https://openapi.programming-hero.com/api/news/categories`;
 
@@ -11,6 +12,8 @@ function loadCategory() {
 
     }
 }
+
+// display category
 
 const displayCategory = categories => {
     try {
@@ -32,6 +35,8 @@ const displayCategory = categories => {
     }
 }
 
+// loading category news
+
 const loadCategoryNews = id => {
     // console.log(id);
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
@@ -48,12 +53,23 @@ const loadCategoryNews = id => {
     }
 }
 
+// display category news
+
 const displayCategoryNews = datas => {
+    const h2element = document.getElementById('category-length');
+    const length = datas.length;
+    if (length === 0) {
+        h2element.innerText = 'No data found';
+    }
+    else {
+        h2element.innerText = length + ' results founds in this category';
+    }
+
 
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
     datas.forEach(data => {
-        // console.log(data);
+        //console.log(data);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
         newsDiv.innerHTML = `
