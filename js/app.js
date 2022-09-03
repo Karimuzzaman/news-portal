@@ -69,7 +69,7 @@ const displayCategoryNews = datas => {
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
     datas.forEach(data => {
-        //console.log(data);
+        console.log(data);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
         newsDiv.innerHTML = `
@@ -78,9 +78,9 @@ const displayCategoryNews = datas => {
           <div class="card-body">
           <h5 class="card-title">${data.title}</h5>
           <p class="card-text text-truncate">${data.details}</p>
-          <h5 class="card-title">Author Name: ${data.author.name}</h5>
+          <h5 class="card-title">Author Name: ${data.author.name === null || data.author.name === '' ? 'no name found' : data.author.name}</h5>
           <img src="${data.author.img}" style="width: 40px; hight: 40px">
-          <p class="card-text text-truncate">Total View: ${data.total_view}</p>
+          <p class="card-text text-truncate">Total View: ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
           <button onclick = "loadModal('${data._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
          </div>
     `;
