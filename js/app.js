@@ -78,7 +78,7 @@ const displayCategoryNews = datas => {
           <p class="card-text text-truncate mt-3">Total View: <i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
 
           <p class="card-text text-truncate">Rating: <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> ${data.rating.number}</p>
-          
+
           <button onclick = "loadModal('${data._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
          </div>
     `;
@@ -113,7 +113,7 @@ const loadModal = news_id => {
 // display modal
 const displayModal = data => {
 
-    // console.log(data);
+    console.log(data);
     try {
         const modalTitle = document.getElementById('newsDetailModalLabel');
         modalTitle.innerText = data.title;
@@ -128,6 +128,8 @@ const displayModal = data => {
         </div>
         <p class="card-text mt-3">Total View: <i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
           <p class="card-text text-truncate">Rating: <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> ${data.rating.number}</p>
+
+          <p class="card-text ms-2">Punlish Date: ${data.author.published_date}</p>
 
     `;
         toggleSpinner(false);
