@@ -112,9 +112,9 @@ const displayModal = data => {
     newsDetails.innerHTML = `
         <h5>${data.title}</h5>
           <p>${data.details}</p>
-          <img src="${data.thumbnail_url}" class="card-img-top" alt="...">
+          <img src="${data.thumbnail_url}" class="img-fluid" alt="...">
           <h5 class="card-title">Author Name: ${data.author.name === null || data.author.name === '' ? 'no name found' : data.author.name}</h5>
-          <img src="${data.author.img}" style="width: 40px; hight: 40px">
+          <img  src="${data.author.img}" style="width: 40px; hight: 40px">
           <p class="card-text text-truncate">Total View: ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
           <p class="card-text text-truncate">Publish Date: ${data.author.published_date}</p>
           <p class="card-text text-truncate">Rating: ${data.rating
