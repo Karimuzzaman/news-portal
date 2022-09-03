@@ -70,9 +70,15 @@ const displayCategoryNews = datas => {
           <div class="card-body">
           <h5 class="card-title">${data.title}</h5>
           <p class="card-text text-truncate">${data.details}</p>
-          <h5 class="card-title">Author Name: ${data.author.name === null || data.author.name === '' ? 'no name found' : data.author.name}</h5>
-          <img src="${data.author.img}" style="width: 40px; hight: 40px">
-          <p class="card-text text-truncate">Total View: ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
+          <div class="d-flex">
+          <img class="rounded-circle"  src="${data.author.img}" style="width: 40px; hight: 40px">    
+          <h5 class="card-title ms-2">Author Name: ${data.author.name === null || data.author.name === '' ? 'no name found' : data.author.name}</h5>
+        </div>
+        
+          <p class="card-text text-truncate mt-3">Total View: <i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
+
+          <p class="card-text text-truncate">Rating: <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> ${data.rating.number}</p>
+          
           <button onclick = "loadModal('${data._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
          </div>
     `;
@@ -116,12 +122,12 @@ const displayModal = data => {
         <h5>${data.title}</h5>
           <p>${data.details}</p>
           <img src="${data.thumbnail_url}" class="img-fluid" alt="...">
-          <h5 class="card-title">Author Name: ${data.author.name === null || data.author.name === '' ? 'no name found' : data.author.name}</h5>
-          <img  src="${data.author.img}" style="width: 40px; hight: 40px">
-          <p class="card-text text-truncate">Total View: ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
-          <p class="card-text text-truncate">Publish Date: ${data.author.published_date}</p>
-          <p class="card-text text-truncate">Rating: ${data.rating
-                .number}</p>
+          <div class="d-flex m-3">
+          <img class="rounded-circle"  src="${data.author.img}" style="width: 40px; hight: 40px">    
+          <h5 class="card-title ms-2">Author Name: ${data.author.name === null || data.author.name === '' ? 'no name found' : data.author.name}</h5>
+        </div>
+        <p class="card-text mt-3">Total View: <i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
+          <p class="card-text text-truncate">Rating: <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> ${data.rating.number}</p>
 
     `;
         toggleSpinner(false);
