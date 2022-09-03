@@ -49,7 +49,7 @@ const loadCategoryNews = id => {
 // display category news
 
 const displayCategoryNews = datas => {
-    // console.log(datas);
+    console.log(datas);
     const h2element = document.getElementById('category-length');
     const length = datas.length;
     if (length === 0) {
@@ -58,11 +58,14 @@ const displayCategoryNews = datas => {
     else {
         h2element.innerText = length + ' results founds in this category';
     }
+    datas.sort((a, b) => {
+        return b.total_view - a.total_view;
+    });
     try {
         const newsContainer = document.getElementById('news-container');
         newsContainer.textContent = '';
         datas.forEach(data => {
-            console.log(data);
+            // console.log(data);
             const newsDiv = document.createElement('div');
             newsDiv.classList.add('col');
             newsDiv.innerHTML = `
