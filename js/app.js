@@ -49,10 +49,11 @@ const loadCategoryNews = id => {
 // display category news
 
 const displayCategoryNews = datas => {
+    // console.log(datas);
     const h2element = document.getElementById('category-length');
     const length = datas.length;
     if (length === 0) {
-        h2element.innerText = 'No data found';
+        h2element.innerText = 'No News found';
     }
     else {
         h2element.innerText = length + ' results founds in this category';
@@ -69,13 +70,13 @@ const displayCategoryNews = datas => {
           <img src="${data.thumbnail_url}" class="card-img-top" alt="...">
           <div class="card-body">
           <h5 class="card-title">${data.title}</h5>
-          <p class="card-text text-truncate">${data.details}</p>
+          <p class="card-text">${data.details.length > 100 ? data.details.substring(0, 100) + '...' : data.details}</p>
           <div class="d-flex">
           <img class="rounded-circle"  src="${data.author.img}" style="width: 40px; hight: 40px">    
-          <h5 class="card-title ms-2">Author Name: ${data.author.name === null || data.author.name === '' ? 'no name found' : data.author.name}</h5>
+          <h5 class="card-title ms-2">Author Name: ${data.author.name === null || data.author.name === '' ? 'no data found' : data.author.name}</h5>
         </div>
         
-          <p class="card-text text-truncate mt-3">Total View: <i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
+          <p class="card-text text-truncate mt-3">Total View: <i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No data found' : data.total_view}</p>
 
           <p class="card-text text-truncate">Rating: <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> ${data.rating.number}</p>
 
@@ -113,7 +114,7 @@ const loadModal = news_id => {
 // display modal
 const displayModal = data => {
 
-    console.log(data);
+    // console.log(data);
     try {
         const modalTitle = document.getElementById('newsDetailModalLabel');
         modalTitle.innerText = data.title;
@@ -124,9 +125,9 @@ const displayModal = data => {
           <img src="${data.thumbnail_url}" class="img-fluid" alt="...">
           <div class="d-flex m-3">
           <img class="rounded-circle"  src="${data.author.img}" style="width: 40px; hight: 40px">    
-          <h5 class="card-title ms-2">Author Name: ${data.author.name === null || data.author.name === '' ? 'no name found' : data.author.name}</h5>
+          <h5 class="card-title ms-2">Author Name: ${data.author.name === null || data.author.name === '' ? 'no data found' : data.author.name}</h5>
         </div>
-        <p class="card-text mt-3">Total View: <i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
+        <p class="card-text mt-3">Total View: <i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No data found' : data.total_view}</p>
           <p class="card-text text-truncate">Rating: <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> ${data.rating.number}</p>
 
           <p class="card-text ms-2">Punlish Date: ${data.author.published_date}</p>
