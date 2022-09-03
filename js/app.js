@@ -15,10 +15,17 @@ const displayCategory = categories => {
         divNewsCategory.classList.add('container');
         divNewsCategory.classList.add('ms-5');
         divNewsCategory.innerHTML = `
-        <button class="border border-0">${category.category_name}</button>
+        <button class="border border-0" onclick="categoryNews('${category.category_id}')">${category.category_name}</button>
     `;
         newsCategory.appendChild(divNewsCategory);
     })
+}
+
+const categoryNews = id => {
+    console.log(id);
+    const url = `https://openapi.programming-hero.com/api/news/category/${id}`
+    console.log(url);
+
 }
 
 
