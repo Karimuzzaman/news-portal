@@ -2,15 +2,11 @@
 function loadCategory() {
     const url = `https://openapi.programming-hero.com/api/news/categories`;
 
-    try {
-        fetch(url)
-            .then(res => res.json())
-            .then(data => displayCategory(data.data.news_category))
-    }
-    catch (error) {
-        console.log(error);
 
-    }
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayCategory(data.data.news_category))
+        .catch(error => console.log(error))
 }
 
 // display category
@@ -32,6 +28,7 @@ const displayCategory = categories => {
     }
     catch (error) {
         console.log(error);
+        alert("error detected");
     }
 }
 
@@ -41,16 +38,12 @@ const loadCategoryNews = id => {
     // console.log(id);
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
     // console.log(url);
-    try {
-        toggleSpinner(true);
-        fetch(url)
-            .then(res => res.json())
-            .then(data => displayCategoryNews(data.data))
 
-    }
-    catch (error) {
-        console.log(error);
-    }
+    toggleSpinner(true);
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayCategoryNews(data.data))
+        .catch(error => console.log(error))
 }
 
 // display category news
@@ -64,15 +57,14 @@ const displayCategoryNews = datas => {
     else {
         h2element.innerText = length + ' results founds in this category';
     }
-
-
-    const newsContainer = document.getElementById('news-container');
-    newsContainer.textContent = '';
-    datas.forEach(data => {
-        console.log(data);
-        const newsDiv = document.createElement('div');
-        newsDiv.classList.add('col');
-        newsDiv.innerHTML = `
+    try {
+        const newsContainer = document.getElementById('news-container');
+        newsContainer.textContent = '';
+        datas.forEach(data => {
+            console.log(data);
+            const newsDiv = document.createElement('div');
+            newsDiv.classList.add('col');
+            newsDiv.innerHTML = `
           <div class="card h-100">
           <img src="${data.thumbnail_url}" class="card-img-top" alt="...">
           <div class="card-body">
@@ -84,32 +76,43 @@ const displayCategoryNews = datas => {
           <button onclick = "loadModal('${data._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
          </div>
     `;
-        newsContainer.appendChild(newsDiv);
-    })
-    toggleSpinner(false);
+            newsContainer.appendChild(newsDiv);
+        })
+        toggleSpinner(false);
+    }
+    catch (error) {
+        console.log(error);
+        alert("error detected");
+    }
+
+
+
 };
+
+// loading modal
 const loadModal = news_id => {
     toggleSpinner(true);
     // console.log(id);
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
     // console.log(url);
-    try {
 
-        fetch(url)
-            .then(res => res.json())
-            .then(data => displayModal(data.data[0]))
-    }
-    catch (error) {
-        console.log(error);
-    }
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayModal(data.data[0]))
+        .catch(error => console.log(error))
+
 }
+
+// display modal
 const displayModal = data => {
 
     // console.log(data);
-    const modalTitle = document.getElementById('newsDetailModalLabel');
-    modalTitle.innerText = data.title;
-    const newsDetails = document.getElementById('news-details');
-    newsDetails.innerHTML = `
+    try {
+        const modalTitle = document.getElementById('newsDetailModalLabel');
+        modalTitle.innerText = data.title;
+        const newsDetails = document.getElementById('news-details');
+        newsDetails.innerHTML = `
         <h5>${data.title}</h5>
           <p>${data.details}</p>
           <img src="${data.thumbnail_url}" class="img-fluid" alt="...">
@@ -118,22 +121,33 @@ const displayModal = data => {
           <p class="card-text text-truncate">Total View: ${data.total_view === null || data.total_view === 0 ? 'No Views found' : data.total_view}</p>
           <p class="card-text text-truncate">Publish Date: ${data.author.published_date}</p>
           <p class="card-text text-truncate">Rating: ${data.rating
-            .number}</p>
+                .number}</p>
 
     `;
-    toggleSpinner(false);
+        toggleSpinner(false);
+    }
+    catch (error) {
+        console.log(error);
+        alert("error detected");
+    }
 
 }
 
 // spinner added
-const toggleSpinner = isLoading => {
-    const loaderSpinner = document.getElementById('loader-spinner');
-    if (isLoading) {
-        loaderSpinner.classList.remove('d-none');
-    }
-    else {
-        loaderSpinner.classList.add('d-none');
+let toggleSpinner = isLoading => {
+    let loaderSpinner = document.getElementById('loader-spinner');
+    try {
+        if (isLoading) {
+            loaderSpinner.classList.remove('d-none');
+        }
+        else {
+            loaderSpinner.classList.add('d-none');
 
+        }
+    }
+    catch (error) {
+        console.log(error);
+        alert("error detected");
     }
 }
 
