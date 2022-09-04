@@ -15,7 +15,7 @@ const displayCategory = categories => {
     try {
         const newsCategory = document.getElementById('news-category');
         categories.forEach(category => {
-            // console.log(category);
+
             const divNewsCategory = document.createElement('div');
             divNewsCategory.classList.add('d-sm-inline');
             divNewsCategory.classList.add('container');
@@ -35,9 +35,9 @@ const displayCategory = categories => {
 // loading category news
 
 const loadCategoryNews = id => {
-    // console.log(id);
+
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
-    // console.log(url);
+
 
     toggleSpinner(true);
     fetch(url)
@@ -49,7 +49,7 @@ const loadCategoryNews = id => {
 // display category news
 
 const displayCategoryNews = datas => {
-    console.log(datas);
+
     const h2element = document.getElementById('category-length');
     const length = datas.length;
     if (length === 0) {
@@ -65,7 +65,7 @@ const displayCategoryNews = datas => {
         const newsContainer = document.getElementById('news-container');
         newsContainer.textContent = '';
         datas.forEach(data => {
-            // console.log(data);
+
             const newsDiv = document.createElement('div');
             newsDiv.classList.add('col');
             newsDiv.innerHTML = `
@@ -74,16 +74,26 @@ const displayCategoryNews = datas => {
           <div class="card-body">
           <h5 class="card-title">${data.title}</h5>
           <p class="card-text">${data.details.length > 100 ? data.details.substring(0, 100) + '...' : data.details}</p>
+
+          <div class="d-flex justify-content-around">
           <div class="d-flex">
           <img class="rounded-circle"  src="${data.author.img}" style="width: 40px; hight: 40px">    
-          <h5 class="card-title ms-2">Author Name: ${data.author.name === null || data.author.name === '' ? 'no data found' : data.author.name}</h5>
-        </div>
+          <h5 class="card-title ms-2">${data.author.name === null || data.author.name === '' ? 'no data found' : data.author.name}</h5>
+          </div>
+
+         <div class = "ms-4">
+         <p class="card-text"><i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No data found' : data.total_view}</p>
+         </div>
+
+         <div class = "ms-3 mb-2">
+         <button onclick = "loadModal('${data._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
+         </div>
+
+          </div>
         
-          <p class="card-text text-truncate mt-3">Total View: <i class="fa-regular fa-eye"></i> ${data.total_view === null || data.total_view === 0 ? 'No data found' : data.total_view}</p>
+          <p class="card-text mt-3">Rating: <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> ${data.rating.number}</p>
 
-          <p class="card-text text-truncate">Rating: <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> <i class="fa-solid fa-star-half-stroke"></i> ${data.rating.number}</p>
-
-          <button onclick = "loadModal('${data._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
+          
          </div>
     `;
             newsContainer.appendChild(newsDiv);
@@ -102,9 +112,9 @@ const displayCategoryNews = datas => {
 // loading modal
 const loadModal = news_id => {
     toggleSpinner(true);
-    // console.log(id);
+
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
-    // console.log(url);
+
 
 
     fetch(url)
@@ -117,7 +127,7 @@ const loadModal = news_id => {
 // display modal
 const displayModal = data => {
 
-    // console.log(data);
+
     try {
         const modalTitle = document.getElementById('newsDetailModalLabel');
         modalTitle.innerText = data.title;
